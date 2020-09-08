@@ -1,0 +1,10 @@
+% DO NOT MAKE EDITS TO THIS FILE
+% POINT VALUES ARE ASSIGNED IN src/points.json
+\usepackage{xstring}
+\newcommand{\points}[1]{
+  \IfEqCase{#1}{
+    {1}{\textbf{[40 points (Coding)]}}
+  }[\PackageError{points}{Cannot assign point value to unknown question: #1}{}]
+}
+% DO NOT MAKE EDITS TO THIS FILE
+% POINT VALUES ARE ASSIGNED IN src/points.json

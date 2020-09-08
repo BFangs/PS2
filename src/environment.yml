@@ -1,0 +1,8 @@
+name: XCS229ii
+channels:
+  - defaults
+dependencies:
+  - python=3.6.9
+  - notebook
+  - numpy>=1.16
+  - matplotlib>=3.1
