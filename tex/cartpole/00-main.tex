@@ -2,13 +2,13 @@
 
 In this problem, you will apply reinforcement learning to automatically
 design a policy for a difficult control task, without ever using any 
-explicit knowledge of the dynamics of the underlying system.\\
+explicit knowledge of the dynamics of the underlying system.
 
 \textbf{The Environment}
 
 The problem we will consider is the inverted pendulum or the pole-balancing 
-problem.\footnote{The dynamics are adapted from {\tt
-    http://www-anw.cs.umass.edu/rlr/domains.html}}
+problem.\footnote{The dynamics are adapted from
+\url{https://en.wikipedia.org/wiki/Inverted_pendulum}}
 
 Consider the figure shown. A thin pole is connected via a free hinge to a cart, 
 which can move laterally on a smooth table surface. The controller is said to 
@@ -95,7 +95,10 @@ etc.) that are also explained inside the code. Use a discount factor
 of $\gamma = 0.995$.  We will assume that the reward $R(s)$ is a function of
 the current state only.
 
-Implement the reinforcement learning algorithm as specified, and run it with the command {\tt python cartpole.py}.
+Implement the reinforcement learning algorithm as specified, and run it with the command
+\begin{lstlisting}
+(CS229ii) $ python cartpole.py
+\end{lstlisting}
 
 The Python starter code will plot a learning curve showing the number of time-steps for which the pole was balanced on each trial. As a sanity check, your resulting plot should like similar to the one shown below, although it can vary significantly.  A correct algorithm should have very little trouble balancing the pole for at least 200 time steps.
 

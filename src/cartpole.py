@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.signal import lfilter
 
-from submission import initialize_mdp_data, choose_action, update_mdp_transition_counts_reward_counts, update_mdp_transition_probs_reward, update_mdp_value
+from submission import initialize_mdp_data, choose_action, update_mdp_transition_counts_sum_reward, update_mdp_transition_probs_avg_reward, update_mdp_value
 
 """
 Parts of the code (cart and pole dynamics, and the state
@@ -153,13 +153,13 @@ def main():
         else:
             R = 0
 
-        update_mdp_transition_counts_reward_counts(mdp_data, state, action, new_state, R)
+        update_mdp_transition_counts_sum_reward(mdp_data, state, action, new_state, R)
 
         # Recompute MDP model whenever pole falls
         # Compute the value function V for the new model
         if new_state == NUM_STATES - 1:
 
-            update_mdp_transition_probs_reward(mdp_data)
+            update_mdp_transition_probs_avg_reward(mdp_data)
 
             converged_in_one_iteration = update_mdp_value(mdp_data, TOLERANCE, GAMMA)
 
