@@ -123,3 +123,13 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# For .DS_Stores and main generated files
+.DS_Store
+*.aux
+*.log
+*.fdb_latexmk
+*.fls
+*.out
+*.synctex.gz
+main.pdf
