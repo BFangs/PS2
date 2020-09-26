@@ -49,6 +49,7 @@ class graded():
         # SKip the test if it is hidden and the solution is not present
         # Do this at the end so that the student's code is run and the elapsed time is calculated.
         args[0].skipTest('Hidden tests are skipped if the solution is not present.')
+      return result
     return wrapper
 
 class timeout_func:

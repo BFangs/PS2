@@ -67,7 +67,7 @@ def choose_action(state, mdp_data):
         mdp_data: The parameters for your MDP. See initialize_mdp_data.
 
     Returns:
-        0 or 1 that is optimal according to your current MDP
+        int, 0 or 1.  The index of the optimal action according to your current MDP.
     """
 
     # BONUS LEARNING OPPORTUNITY: When you have finished the problem set, try
@@ -157,3 +157,6 @@ def update_mdp_value(mdp_data, tolerance, gamma):
 
     # *** START CODE HERE ***
     # *** END CODE HERE ***
+
+    # This function does not return anything
+    return
