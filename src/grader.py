@@ -91,7 +91,7 @@ class Test_1(GradedTestCase):
     self.assertTrue((mdp_data['sum_reward'] == np.array([0.], dtype=np.float64)).all())
     self.assertEqual(mdp_data['num_states'], 1)
 
-  @graded(is_hidden=True)
+  @graded(is_hidden=True, after_published=False)
   def test_02i(self):
     """1-2i-hidden:  Evaluating function initialize_mdp_data() (transition_probs, complex)."""
     n_states = 163
@@ -100,7 +100,7 @@ class Test_1(GradedTestCase):
     self.assertTrue((self.run_with_solution_if_possible(submission, lambda sub_or_sol: sub_or_sol.initialize_mdp_data(163)['transition_probs']) ==
                      mdp_data['transition_probs']).all())
 
-  @graded(is_hidden=True)
+  @graded(is_hidden=True, after_published=False)
   def test_02ii(self):
     """1-2ii-hidden:  Evaluating function initialize_mdp_data() (transition_counts, complex)."""
     n_states = 163
@@ -109,7 +109,7 @@ class Test_1(GradedTestCase):
     self.assertTrue((self.run_with_solution_if_possible(submission, lambda sub_or_sol: sub_or_sol.initialize_mdp_data(163)['transition_counts']) ==
                      mdp_data['transition_counts']).all())
 
-  @graded(is_hidden=True)
+  @graded(is_hidden=True, after_published=False)
   def test_02iii(self):
     """1-2iii-hidden:  Evaluating function initialize_mdp_data() (avg_reward, complex)."""
     n_states = 163
@@ -118,7 +118,7 @@ class Test_1(GradedTestCase):
     self.assertTrue((self.run_with_solution_if_possible(submission, lambda sub_or_sol: sub_or_sol.initialize_mdp_data(163)['avg_reward']) ==
                      mdp_data['avg_reward']).all())
 
-  @graded(is_hidden=True)
+  @graded(is_hidden=True, after_published=False)
   def test_02iv(self):
     """1-2iv-hidden:  Evaluating function initialize_mdp_data() (sum_reward, complex)."""
     n_states = 163
@@ -127,7 +127,7 @@ class Test_1(GradedTestCase):
     self.assertTrue((self.run_with_solution_if_possible(submission, lambda sub_or_sol: sub_or_sol.initialize_mdp_data(163)['sum_reward']) ==
                      mdp_data['sum_reward']).all())
 
-  @graded(is_hidden=True)
+  @graded(is_hidden=True, after_published=False)
   def test_02v(self):
     """1-2v-hidden:  Evaluating function initialize_mdp_data() (num_states, complex)."""
     n_states = 163
@@ -151,7 +151,7 @@ class Test_1(GradedTestCase):
     self.check_valid_mdp_data(mdp_data, n_states)
     self.assertEqual(action, 1)
 
-  @graded(is_hidden=True)
+  @graded(is_hidden=True, after_published=False)
   def test_04(self):
     """1-4-hidden:  Checking choose_action() with multiple states and complete value function."""
     solution_mdp_data = self.run_with_solution_if_possible(submission, observe_steps)
@@ -206,7 +206,7 @@ class Test_1(GradedTestCase):
     self.assertTrue((mdp_data['transition_probs'] == np.array([[[1.], [1.]]],dtype=np.float64)).all())
     self.assertTrue((mdp_data['avg_reward'] == np.array([1.],dtype=np.float64)).all())
 
-  @graded(is_hidden=True)
+  @graded(is_hidden=True, after_published=False)
   def test_08i(self):
     """1-8i-hidden:  Checking transition_probs calculations in update_mdp_transition_probs_avg_reward() (multiple steps and rewards)."""
     mdp_data = self.run_with_solution_if_possible(submission, observe_steps)
@@ -217,7 +217,7 @@ class Test_1(GradedTestCase):
 
     self.assertTrue((mdp_data['transition_probs'] == solution_mdp_data['transition_probs']).all())
 
-  @graded(is_hidden=True)
+  @graded(is_hidden=True, after_published=False)
   def test_08ii(self):
     """1-8ii-hidden:  Checking avg_reward calculations in update_mdp_transition_probs_avg_reward() (multiple steps and rewards)."""
 
@@ -260,7 +260,7 @@ class Test_1(GradedTestCase):
     submission.update_mdp_value(mdp_data, 0.01, 0.99)
     self.assertTrue((mdp_data['value'] == np.array([.99,1.,0.], dtype=np.float64)).all())
 
-  @graded(is_hidden=True)
+  @graded(is_hidden=True, after_published=False)
   def test_11(self):
     """1-11-hidden:  Checking value iteration with complex environment."""
     sub_or_sol = self.run_with_solution_if_possible(submission, lambda sub_or_sol: sub_or_sol)
