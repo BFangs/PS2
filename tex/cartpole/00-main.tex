@@ -50,11 +50,11 @@ to balance the pole using only the state transitions and rewards observed.\\
 \textbf{Learning Algorithm}
 
 The files for this problem are in the {\tt src/} directory.
-Most of the the code has already been written for you, and you need 
-to make changes only to {\tt src/cartpole.py} in the places specified. This 
-file can be run to show a display and to plot a learning curve 
-at the end.  Read the comments at the top of the file for more details
-on the working of the simulation.
+Most of the the code has already been written for you in {\tt src/cartpole.py}
+and {\tt src/env.py}.  Like all coding assignments in this course, you need only
+make changes only to {\tt src/cartpole.py}. The other files will import the
+functions that you have implemented.  The comments at the top of
+{\tt src/cartpole.py} provide more details on the structure of the simulation.
 
 To solve the inverted pendulum problem, you will estimate a 
 model (i.e., transition probabilities and rewards) for the underlying 
@@ -89,18 +89,22 @@ convergence criterion that checks if the maximum absolute change in the
 value function on an iteration exceeds some specified tolerance. 
 
 The code outline for this problem is already in 
-{\tt src/cartpole.py}, and you need to write code fragments only at the
-places specified in the file. There are several details (convergence criteria
-etc.) that are also explained inside the code. Use a discount factor
+{\tt src/cartpole.py}. There are several details (convergence criteria
+etc.) that are explained inside this file. Use a discount factor
 of $\gamma = 0.995$.  We will assume that the reward $R(s)$ is a function of
 the current state only.
 
-Implement the reinforcement learning algorithm as specified, and run it with the command
+Implement the reinforcement learning algorithm as specified, and run it with the
+following command form within the |src/| directory.
 \begin{lstlisting}
 (CS229ii) $ python cartpole.py
 \end{lstlisting}
 
-The Python starter code will plot a learning curve showing the number of time-steps for which the pole was balanced on each trial. As a sanity check, your resulting plot should like similar to the one shown below, although it can vary significantly.  A correct algorithm should have very little trouble balancing the pole for at least 200 time steps.
+The Python starter code will plot a learning curve showing the number of
+time-steps for which the pole was balanced on each trial. As a sanity check,
+your resulting plot should like similar to the one shown below, although it can
+vary significantly.  A correct algorithm should have very little trouble
+balancing the pole for at least 200 time steps.
 
 \begin{center}
   \includegraphics[scale=0.75]{cartpole/control}
