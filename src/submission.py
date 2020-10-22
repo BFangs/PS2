@@ -13,7 +13,7 @@ def initialize_mdp_data(num_states):
     Initialize all state rewards and counts to zero.
 
     Args:
-        num_states: The number of states
+        num_states: The number of states.  This value is constant.
 
     Returns: The initial MDP parameters.  It should be a Python dict with the
         following key/value structure.  You may add more key/value pairs to this
@@ -36,7 +36,8 @@ def initialize_mdp_data(num_states):
         'value': np.ndarray, dtype=np.float64, shape=(num_states,). The
             state-value calculated for each MDP state (after value/policy
             iteration).
-        'num_states': Int
+        'num_states': Int.  Convenience value.  This will not change throughout
+            the MDP and can be calculated from the shapes of other variables.
         }
     """
     num_actions = 2 # RIGHT AND LEFT ACTIONS
@@ -91,7 +92,6 @@ def update_mdp_transition_counts_sum_reward(mdp_data, state, action, new_state, 
 
     Record the number of times `state, action, new_state` occurs.
     Record the rewards for every `new_state`.
-    Record the number of time `new_state` was reached.
 
     Args:
         mdp_data: The parameters of your MDP. See initialize_mdp_data.

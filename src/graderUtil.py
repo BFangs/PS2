@@ -18,14 +18,14 @@ class graded():
                is_hidden = False,
                is_extra_credit = False,
                timeout = 5,
-               after_published=None,
+               after_published = False,
                hide_errors = False):
     self.leaderboard_col_name = leaderboard_col_name
     self.leaderboard_sort_order = leaderboard_sort_order
     self.is_hidden = is_hidden
     self.is_extra_credit = is_extra_credit
     self.timeout = timeout
-    self.after_published = is_hidden if after_published is None else after_published
+    self.after_published = after_published
     self.hide_errors = hide_errors
 
   def __call__(self, func):
