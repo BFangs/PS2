@@ -87,7 +87,7 @@ def choose_action(state, mdp_data):
 
 def update_mdp_transition_counts_sum_reward(mdp_data, state, action, new_state, reward):
     """
-    Update the transition count and reward sum information in your mdp_data. 
+    Update the transition count and reward sum information in your mdp_data.
     Do not change the other MDP parameters (those get changed later).
 
     Record the number of times `state, action, new_state` occurs.
@@ -119,7 +119,7 @@ def update_mdp_transition_probs_avg_reward(mdp_data):
     been tried before, or the state has never been visited before. In that
     case, you must not change that component (and thus keep it at the
     initialized uniform distribution).
-    
+
     Args:
         mdp_data: The data for your MDP. See initialize_mdp_data.
 
@@ -144,14 +144,14 @@ def update_mdp_value(mdp_data, tolerance, gamma):
     Perform value iteration using the new estimated model for the MDP.
     The convergence criterion should be based on `TOLERANCE` as described
     at the top of the file.
-    
+
     Args:
         mdp_data: The data for your MDP. See initialize_mdp_data.
         tolerance: The tolerance to use for the convergence criterion.
         gamma: Your discount factor.
 
     Returns:
-        Nothing
+        True if the value iteration converged in one iteration
 
     """
 
