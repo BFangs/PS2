@@ -54,6 +54,14 @@ def initialize_mdp_data(num_states):
     }
 
     # *** START CODE HERE ***
+    mdp_data['transition_probs'] = np.full((num_states, num_actions, num_states), 1/num_states)
+    mdp_data['transition_counts'] = np.zeros((num_states, num_actions, num_states))
+
+    mdp_data['avg_reward'] = np.zeros(num_states)
+    mdp_data['sum_reward'] = np.zeros(num_states)
+
+    mdp_data['value'] = np.random.rand(num_states)
+    mdp_data['num_states'] = num_states
     # *** END CODE HERE ***
     return mdp_data
 
@@ -81,6 +89,8 @@ def choose_action(state, mdp_data):
 
     action = None
     # *** START CODE HERE ***
+    # return  0 if np.random.uniform() < 0.5 else 1
+    action = np.argmax(np.sum(mdp_data['transition_probs'] * mdp_data['value'], axis=2), axis=1)[state]
     # *** END CODE HERE ***
     return action
 
@@ -105,6 +115,8 @@ def update_mdp_transition_counts_sum_reward(mdp_data, state, action, new_state, 
     """
 
     # *** START CODE HERE ***
+    mdp_data['transition_counts'][state][action][new_state] += 1
+    mdp_data['sum_reward'][new_state] += reward
     # *** END CODE HERE ***
 
     # This function does not return anything
@@ -129,6 +141,9 @@ def update_mdp_transition_probs_avg_reward(mdp_data):
     """
 
     # *** START CODE HERE ***
+    count = mdp_data['transition_counts'].sum(axis=0).sum(axis=0)
+    mdp_data['avg_reward'] = mdp_data['sum_reward'] / count
+
     # *** END CODE HERE ***
 
     # This function does not return anything
