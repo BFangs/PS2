@@ -65,7 +65,6 @@ def initialize_mdp_data(num_states):
     # *** END CODE HERE ***
     return mdp_data
 
-
 def choose_action(state, mdp_data):
     """
     Choose the next action (0 or 1) that is optimal according to your current
@@ -142,8 +141,18 @@ def update_mdp_transition_probs_avg_reward(mdp_data):
 
     # *** START CODE HERE ***
     count = mdp_data['transition_counts'].sum(axis=0).sum(axis=0)
-    mdp_data['avg_reward'] = mdp_data['sum_reward'] / count
+    mdp_data['avg_reward'] = np.divide(mdp_data['sum_reward'], count, where=count!=0)
 
+    # totals = np.count_nonzero(mdp_data['transition_counts'], axis=0).sum(axis=0)
+    # new_probs = np.divide(mdp_data['transition_counts'], totals, where=totals!=0)
+    # nonzero = np.nonzero(new_probs)
+    # # print(new_probs)
+    # # print(nonzero)
+    # mdp_data['transition_probs'][nonzero] = new_probs[nonzero]
+    total = mdp_data['transition_counts'].sum(axis=2, keepdims=True)
+    nonzero = np.nonzero(count)
+    new_probs = np.divide(mdp_data['transition_counts'], total, where=total!=0)
+    mdp_data['transition_probs'] = new_probs
     # *** END CODE HERE ***
 
     # This function does not return anything
