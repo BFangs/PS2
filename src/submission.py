@@ -157,6 +157,3 @@ def update_mdp_value(mdp_data, tolerance, gamma):
 
     # *** START CODE HERE ***
     # *** END CODE HERE ***
-
-    # This function does not return anything
-    return
