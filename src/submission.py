@@ -54,13 +54,15 @@ def initialize_mdp_data(num_states):
     }
 
     # *** START CODE HERE ***
-    mdp_data['transition_probs'] = np.full((num_states, num_actions, num_states), 1/num_states)
-    mdp_data['transition_counts'] = np.zeros((num_states, num_actions, num_states))
+    np.random.seed(3)
 
-    mdp_data['avg_reward'] = np.zeros(num_states)
-    mdp_data['sum_reward'] = np.zeros(num_states)
+    mdp_data['transition_probs'] = np.full((num_states, num_actions, num_states), 1/num_states, dtype=np.float64)
+    mdp_data['transition_counts'] = np.zeros((num_states, num_actions, num_states), dtype=np.float64)
 
-    mdp_data['value'] = np.random.rand(num_states)
+    mdp_data['avg_reward'] = np.zeros(num_states, dtype=np.float64)
+    mdp_data['sum_reward'] = np.zeros(num_states, dtype=np.float64)
+
+    mdp_data['value'] = np.random.rand(num_states) * 0.1
     mdp_data['num_states'] = num_states
     # *** END CODE HERE ***
     return mdp_data
@@ -89,7 +91,12 @@ def choose_action(state, mdp_data):
     action = None
     # *** START CODE HERE ***
     # return  0 if np.random.uniform() < 0.5 else 1
-    action = np.argmax(np.sum(mdp_data['transition_probs'] * mdp_data['value'], axis=2), axis=1)[state]
+    # action = np.argmax(np.sum(mdp_data['transition_probs'] * mdp_data['value'], axis=2), axis=1)[state]
+    probs = mdp_data['transition_probs'][state].dot(mdp_data['value'])
+    if probs[0] == probs[1]:
+        action =  0 if np.random.uniform() < 0.5 else 1
+    else:
+        action = np.argmax(probs)
     # *** END CODE HERE ***
     return action
 
@@ -143,15 +150,9 @@ def update_mdp_transition_probs_avg_reward(mdp_data):
     count = mdp_data['transition_counts'].sum(axis=0).sum(axis=0)
     mdp_data['avg_reward'] = np.divide(mdp_data['sum_reward'], count, where=count!=0)
 
-    # totals = np.count_nonzero(mdp_data['transition_counts'], axis=0).sum(axis=0)
-    # new_probs = np.divide(mdp_data['transition_counts'], totals, where=totals!=0)
-    # nonzero = np.nonzero(new_probs)
-    # # print(new_probs)
-    # # print(nonzero)
-    # mdp_data['transition_probs'][nonzero] = new_probs[nonzero]
     total = mdp_data['transition_counts'].sum(axis=2, keepdims=True)
-    nonzero = np.nonzero(count)
-    new_probs = np.divide(mdp_data['transition_counts'], total, where=total!=0)
+    out = np.copy(mdp_data['transition_probs'])
+    new_probs = np.divide(mdp_data['transition_counts'], total, out=out, where=total!=0)
     mdp_data['transition_probs'] = new_probs
     # *** END CODE HERE ***
 
@@ -180,4 +181,26 @@ def update_mdp_value(mdp_data, tolerance, gamma):
     """
 
     # *** START CODE HERE ***
+    num_states = mdp_data['num_states']
+    old_value = mdp_data['value']
+    iteration = 0
+    converged = False
+    while not converged and iteration < 200:
+        new_value = np.zeros(num_states)
+
+        expected_val = mdp_data['transition_probs'].dot(mdp_data['value'])
+        max_value = np.max(expected_val, axis=1)
+        new_value = mdp_data['avg_reward'] + (max_value * gamma)
+        
+        delta = np.max(np.abs(new_value - old_value))
+        converged = tolerance > delta
+
+        old_value = new_value
+        iteration += 1
+
+    # print(new_value)
+    mdp_data['value'] = new_value
+
+    return iteration == 1
+
     # *** END CODE HERE ***
