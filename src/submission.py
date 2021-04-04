@@ -85,8 +85,8 @@ def choose_action(state, mdp_data):
     # called epsilon greedy, which drastically improves performance.  Why do you
     # think this works so well?
     #
-    # if np.random.uniform() < 0.1: # 10% of the time, choose a random action
-    #     return  0 if np.random.uniform() < 0.5 else 1
+    if np.random.uniform() < 0.1: # 10% of the time, choose a random action
+        return  0 if np.random.uniform() < 0.5 else 1
 
     action = None
     # *** START CODE HERE ***
@@ -185,14 +185,16 @@ def update_mdp_value(mdp_data, tolerance, gamma):
     old_value = mdp_data['value']
     iteration = 0
     converged = False
-    while not converged and iteration < 200:
+    while not converged:
         new_value = np.zeros(num_states)
 
-        expected_val = mdp_data['transition_probs'].dot(mdp_data['value'])
+        expected_val = mdp_data['transition_probs'].dot(old_value)
         max_value = np.max(expected_val, axis=1)
         new_value = mdp_data['avg_reward'] + (max_value * gamma)
         
         delta = np.max(np.abs(new_value - old_value))
+        # print("\nold", old_value)
+        # print("\nnew", new_value)
         converged = tolerance > delta
 
         old_value = new_value
